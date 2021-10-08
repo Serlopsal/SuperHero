@@ -5,5 +5,6 @@ using SuperheroClient.Models;
 namespace SuperheroClient.Repository {
   public interface IHeroRepository {
     Task<HeroResponseModel> getHero(int id);
+    Task<SearchResponseModel> searchHero(string filter);
   }
 }

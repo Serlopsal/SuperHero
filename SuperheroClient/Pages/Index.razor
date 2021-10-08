@@ -7,11 +7,3 @@
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
-
-
-@code{
-  override protected async Task OnInitializedAsync(){
-    var x = await repository.getHero(-1);
-    
-  }
-}

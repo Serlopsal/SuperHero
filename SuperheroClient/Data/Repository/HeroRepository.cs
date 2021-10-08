@@ -20,5 +20,14 @@ namespace SuperheroClient.Repository {
         responseContent.hero = JsonConvert.DeserializeObject<HeroModel>(stringContent);
       return responseContent;
     }
+
+    public async Task<SearchResponseModel> searchHero(string filter){
+      var client = new HttpClient();
+      var url = _baseUrl + $"/search/{filter}";
+      var getter = await client.GetAsync(url);
+      var stringContent = await getter.Content.ReadAsStringAsync();
+      var responseContent = JsonConvert.DeserializeObject<SearchResponseModel>(stringContent);
+      return responseContent;
+    }
   }
 }

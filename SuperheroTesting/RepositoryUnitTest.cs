@@ -19,6 +19,17 @@ namespace SuperheroTesting
       _repository = new HeroRepository();
     }
 
+    [TestCase("ThisIsNotASuperHeroName")]
+    public async Task getHeroFail(string filter){
+      var response = await _repository.searchHero(filter);
+      Assert.IsNotNull(response.error);
+    }
+
+    [TestCase("iron")]
+    public async Task getHeroById(string filter){
+      var response = await _repository.searchHero(filter);
+      Assert.IsInstanceOf<List<HeroModel>>(response.results);
+    }
 
     [TestCase(-1)]
     [TestCase(0)]

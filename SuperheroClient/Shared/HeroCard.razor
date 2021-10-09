@@ -1,0 +1,17 @@
+@using SuperheroClient.Models
+
+<NavLink class="nav-link" href='@("hero/" + Hero.id)'>
+  <div class="card text-white" style="border-radius: 8px; overflow: hidden;">
+    <img class="img-fluid" src=@Hero.image.url  />
+    <div class="card-img-overlay" style="background-color:#00000050; top: 80%">
+      <div class="card-title">
+        <h3 class="card-title" style="text-shadow: 5px 5px 5px #666;">@Hero.name</h3>
+      </div>
+    </div>
+  </div>
+</NavLink>
+
+@code{
+  [Parameter]
+  public HeroModel Hero { get; set; }
+}

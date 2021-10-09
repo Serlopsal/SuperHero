@@ -1,9 +1,38 @@
 @page "/"
+
+@using SuperheroClient.Models
 @using SuperheroClient.Repository
+
 @inject IHeroRepository repository
 
-<h1>Hello, world!</h1>
+<h1>Marvel and DC</h1>
 
-Welcome to your new app.
+<p>All superheroes from both the comic universe.</p>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@if (heroes == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+  <div class="container">
+    <div class="row my-3">
+      <div class="col">
+        <div class="card-columns">
+          @foreach (var hero in heroes)
+          {
+            <HeroCard Hero=hero /> 
+          }
+        </div>
+      </div>
+    </div>
+  </div>   
+}
+
+@code {
+  private List<HeroModel> heroes;
+  
+  protected override async Task OnInitializedAsync(){
+    heroes = (await repository.searchHero("fire")).results;
+  }
+}

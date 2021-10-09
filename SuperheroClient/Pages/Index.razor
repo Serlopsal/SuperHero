@@ -2,37 +2,56 @@
 
 @using SuperheroClient.Models
 @using SuperheroClient.Repository
-
+@using System.Timers;
 @inject IHeroRepository repository
 
-<h1>Marvel and DC</h1>
 
-<p>All superheroes from both the comic universe.</p>
 
-@if (heroes == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-  <div class="container">
-    <div class="row my-3">
-      <div class="col">
-        <div class="card-columns">
-          @foreach (var hero in heroes)
-          {
-            <HeroCard Hero=hero /> 
-          }
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Marvel and DC</h1>
+      <p>All superheroes from both the comic universe.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h5>Lookup for four favorite character</h5>
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-sm">Character</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" @bind="filter">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" @onclick="Search">Search</button>
         </div>
       </div>
     </div>
-  </div>   
-}
+  </div>
+
+  @if (heroes == null)
+  {
+      <p><em>Type some character name</em></p>
+  }
+  else
+  {
+      <div class="row my-3">
+        <div class="col">
+          <div class="card-columns">
+            @foreach (var hero in heroes)
+            {
+              <HeroCard Hero=hero /> 
+            }
+          </div>
+        </div>
+      </div>
+  }
+</div>
 
 @code {
   private List<HeroModel> heroes;
-  
-  protected override async Task OnInitializedAsync(){
-    heroes = (await repository.searchHero("fire")).results;
+  private string filter;
+  private async Task Search(){
+    heroes = (await repository.searchHero(filter)).results;
   }
 }

@@ -14,7 +14,7 @@ namespace SuperheroClient.Repository {
       var client = new HttpClient();
       var url = _baseUrl + $"/{id}";
       var getter = await client.GetAsync(url);
-      var stringContent = await getter.Content.ReadAsStringAsync();
+      var stringContent = (await getter.Content.ReadAsStringAsync()).Replace("\"null\"","\"\"");
       var responseContent = JsonConvert.DeserializeObject<HeroResponseModel>(stringContent);
       if(responseContent.response != "error")  
         responseContent.hero = JsonConvert.DeserializeObject<HeroModel>(stringContent);
@@ -25,7 +25,7 @@ namespace SuperheroClient.Repository {
       var client = new HttpClient();
       var url = _baseUrl + $"/search/{filter}";
       var getter = await client.GetAsync(url);
-      var stringContent = await getter.Content.ReadAsStringAsync();
+      var stringContent = (await getter.Content.ReadAsStringAsync()).Replace("\"null\"","\"\"");
       var responseContent = JsonConvert.DeserializeObject<SearchResponseModel>(stringContent);
       return responseContent;
     }

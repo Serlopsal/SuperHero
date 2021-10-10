@@ -26,12 +26,19 @@
     </div>
   </div>
 
-  @if (heroes == null)
+  @if (heroes == null && !loading)
   {
+    @if(!loadingCompleted){
       <p><em>Type some character name</em></p>
+    } else {
+      <p><em>Character not found, try again</em></p>
+    }
   }
   else
   {
+    @if(loading){
+      <loading></loading>
+    } else {
       <div class="row my-3">
         <div class="col">
           <div class="card-columns">
@@ -42,13 +49,25 @@
           </div>
         </div>
       </div>
+    }
   }
 </div>
 
 @code {
-  private List<HeroModel> heroes;
+  private List<HeroModel> _heroes;
+  private bool loading = false;
+  private bool loadingCompleted = false;
+  private List<HeroModel> heroes{
+      get{ return _heroes; }
+      set{ 
+        loading = false;
+        loadingCompleted = true;
+        _heroes = value;
+      }
+    }
   private string filter;
   private async Task Search(){
+    loading = true;
     heroes = (await repository.searchHero(filter)).results;
   }
 }

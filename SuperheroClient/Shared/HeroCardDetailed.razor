@@ -1,0 +1,100 @@
+@using SuperheroClient.Models
+
+<div class="container">
+  <div class="row p-3">
+    
+    <div class="col-12 col-md-4">
+      <div class="card" style="overflow:hidden; corner-radius:4px;">
+        <img class="img-fluid" src="@hero.image.url" />
+      </div>
+    </div>
+    
+    <div class="col-12 col-md-8">
+      <h1 class="Display1 mb-0">@hero.name</h1>
+      <span class="h3 text-secondary">@hero.appearance.gender</span>
+      
+      <div class="card mt-3">
+        <div class="card-header">
+          <h5 class="card-title">Biography</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-4 text-secondary text-uppercase">FullName</div>
+            <div class="col-8">@hero.biography.fullName</div>
+          </div>
+          <div class="row">
+            <div class="col-4 text-secondary text-uppercase">alter egos</div>
+            <div class="col-8">@hero.biography.alterEgos</div>
+          </div>
+          <div class="row">
+            <div class="col-4 text-secondary text-uppercase">Place Of Birth</div>
+            <div class="col-8">@hero.biography.placeOfBirth</div>
+          </div>
+          <div class="row">
+            <div class="col-4 text-secondary text-uppercase">Aliases</div>
+            <div class="col-8">
+              @foreach (var alias in @hero.biography.aliases)
+              {
+                <p class="m-0">@alias</p>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card mt-3">
+        <div class="card-header">
+          <h5 class="card-title">Work</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-2 text-secondary text-uppercase">Base</div>
+            <div class="col-10">
+              <p class="m-0">@hero.work.location</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2 text-secondary text-uppercase">Occupation</div>
+            <div class="col-10">
+              <p class="m-0">@hero.work.occupation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card mt-3">
+        <div class="card-header">
+          <h5 class="card-title">Appareance</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-2 text-secondary text-uppercase">Relatives</div>
+            <div class="col-10">
+              <p class="m-0">@hero.connections.relatives</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2 text-secondary text-uppercase">Group affiliation</div>
+            <div class="col-10">
+              <p class="m-0">@hero.connections.groupAffiliation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@code{
+  [Parameter]
+  public HeroModel hero { get; set; }
+}

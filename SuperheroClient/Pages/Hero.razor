@@ -1,0 +1,46 @@
+@page "/Hero/{id}"
+
+@using SuperheroClient.Models
+@using SuperheroClient.Repository
+@inject IHeroRepository repository
+
+@if(loading)
+{
+  <Loading></Loading>
+} else {
+  @if(String.IsNullOrEmpty(error) && hero != null){
+    <HeroCardDetailed hero=hero></HeroCardDetailed>
+  } else {
+    <NotFound></NotFound>
+  }
+}  
+
+@code{
+  [Parameter]
+  public string id { get; set; }
+  private int idInt { get; set; }
+  private HeroModel hero { get; set; } = null;
+  private string error { get; set; } = null;
+  private bool loading { get; set; } = true;
+  protected override async Task OnInitializedAsync(){
+    try{
+      idInt = int.Parse(id);
+      if(idInt <= 0)
+        throw new ArgumentException("Id must be greater or equal 1");
+
+      var response = await repository.getHero(idInt);
+      if(!String.IsNullOrEmpty(response.error)){
+        error = response.error;
+      loading = false;
+      } else
+        if(response.hero != null){
+          hero = response.hero;
+          loading = false;
+        }
+    }
+    catch{
+      idInt = -1;
+      loading = false;
+    }
+  }
+}

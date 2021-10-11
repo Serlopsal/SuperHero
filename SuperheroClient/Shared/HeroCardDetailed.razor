@@ -1,7 +1,7 @@
 @using SuperheroClient.Models
 
-<div class="container">
-  <div class="row p-3">
+<div class="container mb-5">
+  <div class="row p-md-3">
     
     <div class="col-12 col-md-4">
       <div class="card" style="overflow:hidden; corner-radius:4px;">
@@ -19,20 +19,28 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-4 text-secondary text-uppercase">FullName</div>
-            <div class="col-8">@hero.biography.fullName</div>
+            <div class="col-12 col-md-5 text-secondary text-uppercase">FullName</div>
+            <div class="col-12 col-md-7">@hero.biography.fullName</div>
           </div>
           <div class="row">
-            <div class="col-4 text-secondary text-uppercase">alter egos</div>
-            <div class="col-8">@hero.biography.alterEgos</div>
+            <div class="col-12 col-md-5 text-secondary text-uppercase">alter egos</div>
+            <div class="col-12 col-md-7">@hero.biography.alterEgos</div>
           </div>
           <div class="row">
-            <div class="col-4 text-secondary text-uppercase">Place Of Birth</div>
-            <div class="col-8">@hero.biography.placeOfBirth</div>
+            <div class="col-12 col-md-5 text-secondary text-uppercase">Place Of Birth</div>
+            <div class="col-12 col-md-7">@hero.biography.placeOfBirth</div>
           </div>
           <div class="row">
-            <div class="col-4 text-secondary text-uppercase">Aliases</div>
-            <div class="col-8">
+            <div class="col-12 col-md-5 text-secondary text-uppercase">Publisher</div>
+            <div class="col-12 col-md-7">@hero.biography.publisher</div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-5 text-secondary text-uppercase">Alignment</div>
+            <div class="col-12 col-md-7">@hero.biography.alignment</div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-5 text-secondary text-uppercase">Aliases</div>
+            <div class="col-12 col-md-7">
               @foreach (var alias in @hero.biography.aliases)
               {
                 <p class="m-0">@alias</p>
@@ -49,19 +57,41 @@
     <div class="col-12">
       <div class="card mt-3">
         <div class="card-header">
-          <h5 class="card-title">Work</h5>
+          <h5 class="card-title">Appearance</h5>
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-2 text-secondary text-uppercase">Base</div>
-            <div class="col-10">
-              <p class="m-0">@hero.work.location</p>
+            <div class="col-12 col-md-3 text-secondary text-uppercase">Race</div>
+            <div class="col-12 col-md-9">@hero.appearance.race</div>
+          </div>
+
+          <div class="row">
+            <div class="col-6 m-0 p-0">
+              <div class="col-12 col-md-3 text-secondary text-uppercase">Height</div>
+              <div class="col-12 col-md-9">
+                @foreach(var height in @hero.appearance.height){
+                  <p class="m-0">@height</p>
+                }
+              </div>
+            </div>
+            <div class="col-6 m-0 p-0">
+              <div class="col-12 col-md-3 text-secondary text-uppercase">Weight</div>
+              <div class="col-12 col-md-9">
+                @foreach(var weight in @hero.appearance.weight){
+                  <p class="m-0">@weight</p>
+                }
+              </div>
             </div>
           </div>
+
           <div class="row">
-            <div class="col-2 text-secondary text-uppercase">Occupation</div>
-            <div class="col-10">
-              <p class="m-0">@hero.work.occupation</p>
+            <div class="col-6 m-0 p-0">
+              <div class="col-12 col-md-3 text-secondary text-uppercase">Eye Color</div>
+              <div class="col-12 col-md-9">@hero.appearance.eyeColor</div>
+            </div>
+            <div class="col-6 m-0 p-0">
+              <div class="col-12 col-md-3 text-secondary text-uppercase">Hair Color</div>
+              <div class="col-12 col-md-9">@hero.appearance.hairColor</div>
             </div>
           </div>
         </div>
@@ -73,20 +103,36 @@
     <div class="col-12">
       <div class="card mt-3">
         <div class="card-header">
-          <h5 class="card-title">Appareance</h5>
+          <h5 class="card-title">Work</h5>
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-2 text-secondary text-uppercase">Relatives</div>
-            <div class="col-10">
-              <p class="m-0">@hero.connections.relatives</p>
-            </div>
+            <div class="col-12 col-md-3 text-secondary text-uppercase">Base</div>
+            <div class="col-12 col-md-9">@hero.work.location</div>
           </div>
           <div class="row">
-            <div class="col-2 text-secondary text-uppercase">Group affiliation</div>
-            <div class="col-10">
-              <p class="m-0">@hero.connections.groupAffiliation</p>
-            </div>
+            <div class="col-12 col-md-3 text-secondary text-uppercase">Occupation</div>
+            <div class="col-12 col-md-9">@hero.work.occupation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card mt-3">
+        <div class="card-header">
+          <h5 class="card-title">Connections</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-md-3 text-secondary text-uppercase">Relatives</div>
+            <div class="col-12 col-md-9">@hero.connections.relatives</div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-3 text-secondary text-uppercase">Group affiliation</div>
+            <div class="col-12 col-md-9">@hero.connections.groupAffiliation</div>
           </div>
         </div>
       </div>
